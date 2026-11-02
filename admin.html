@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Worship Library Admin — Christ the Rock Covenant Church Camarin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- script:// tech: only self-hosted JS here so the build stays zero-dependency -->
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="#" class="brand" onclick="AdminNav.go('dashboard')">
+        <svg viewBox="0 0 32 32"><path d="M16 2 L28 9.5 L28 21.5 L16 30 L4 21.5 L4 9.5 Z" fill="#c8822a"/><circle cx="16" cy="17" r="3.4" fill="#fff"/></svg>
+        <span>Worship Library</span>
+      </a>
+      <nav class="nav-links" id="admin-nav">
+        <a href="#" data-admin-view="dashboard"><span class="icon">▣</span> Dashboard</a>
+        <a href="#" data-admin-view="songs"><span class="icon">🎵</span> Songs</a>
+        <a href="#" data-admin-view="website"><span class="icon">🎨</span> Website</a>
+        <a href="#" data-admin-view="users"><span class="icon">👥</span> Users</a>
+        <a href="#" data-admin-view="logs"><span class="icon">📋</span> Logs</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap admin-shell">
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <strong>Christ the Rock</strong><br /><span class="text-soft">Camarin • Worship Ops</span>
+      </div>
+      <nav id="sidebar-nav">
+        <a href="#" data-admin-view="dashboard" class="active">Dashboard</a>
+        <a href="#" data-admin-view="songs">Songs</a>
+        <a href="#" data-admin-view="website">Website</a>
+        <a href="#" data-admin-view="users">Users</a>
+        <a href="#" data-admin-view="logs">Activity logs</a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" id="logout-link" class="btn btn-ghost btn-sm">Logout</a>
+      </div>
+    </aside>
+
+    <section class="admin-main">
+      <header class="admin-topbar">
+        <h1 id="admin-title">Dashboard</h1>
+        <div class="admin-user">
+          <span id="admin-user-name">—</span>
+          <span id="admin-user-role" class="text-soft">—</span>
+        </div>
+        <button id="logout-btn" class="btn btn-sm btn-ghost">Logout</button>
+      </header>
+      <div id="app" class="admin-content"></div>
+    </section>
+  </div>
+
+  <script src="/js/config.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/admin-auth.js"></script>
+  <script src="/js/admin.js"></script>
+  <script src="/js/admin-dashboard.js"></script>
+  <script src="/js/admin-songs.js"></script>
+  <script src="/js/admin-settings.js"></script>
+  <script src="/js/admin-users.js"></script>
+  <script src="/js/admin-logs.js"></script>
+</body>
+</html>
