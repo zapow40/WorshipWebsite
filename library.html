@@ -3,31 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Song Library — Christ the Rock Covenant Church Camarin</title>
-  <meta name="description" content="Browse the worship song library of Christ the Rock Covenant Church Camarin. Search, filter, and download backing tracks." />
+  <title>Worship Song Library — Christ the Rock Covenant Church Camarin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="wrap">
-      <a href="index.html" class="brand">
-        <svg viewBox="0 0 32 32"><path d="M16 2 L28 9.5 L28 21.5 L16 30 L4 21.5 L4 9.5 Z" fill="#c8822a"/><circle cx="16" cy="17" r="3.4" fill="#fff"/></svg>
-        Christ the Rock Covenant Church Camarin
+      <a href="/index.html" class="brand">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="2" fill="none" />
+          <path d="M18 10 L24 16 L20 16 L20 22 L16 22 L16 16 L12 16 Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" />
+          <circle cx="18" cy="26" r="2" fill="currentColor" />
+        </svg>
+        <span>Christ the Rock Covenant Church Camarin</span>
       </a>
       <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="library.html">Library</a>
-        <a href="admin-login.html" class="btn btn-ghost btn-sm">Admin</a>
+        <a href="/index.html">Home</a>
+        <a href="/library.html">Library</a>
+        <a href="/admin-login.html">Admin</a>
       </nav>
     </div>
   </header>
 
   <main class="section">
     <div class="wrap">
-      <h1 class="section-title">Worship song library</h1>
-      <p class="section-sub">Search, filter by category, and download backing tracks. Listening requires no account — downloads are always free.</p>
+      <div class="flex justify-between items-center mb-4">
+        <div>
+          <h1 class="section-title">Worship song library</h1>
+          <p class="section-sub">Search, filter by category, and download backing tracks. Listening requires no account — downloads are always free.</p>
+        </div>
+        <a href="/index.html" class="btn btn-ghost btn-sm">← Back to home</a>
+      </div>
 
       <!-- toolbar -->
       <div class="lib-toolbar">
@@ -52,20 +60,31 @@
     </div>
   </main>
 
-  <footer class="footer" id="footer">
-    <div class="wrap footer-grid">
-      <div><h4>Christ the Rock</h4><p class="text-soft">Christ the Rock Covenant Church Camarin.</p></div>
-      <div><h4>Stay connected</h4><ul class="text-soft" id="social-links"></ul></div>
-      <div><h4>Visit us</h4><p class="text-soft" style="font-size:.85rem;">Camarin, Caloocan</p></div>
-      <div><h4>Library</h4><ul class="text-soft"><li><a href="index.html">Home</a></li><li><a href="library.html">Browse songs</a></li></ul></div>
+  <footer class="footer" style="padding:2rem 0 1.5rem;">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h4 id="footer-title">Christ the Rock Covenant Church Camarin</h4>
+          <p id="footer-tagline" class="text-soft">Worship songs for our community</p>
+        </div>
+        <div>
+          <h4 class="mt-2">Contact</h4>
+          <p id="contact-links" class="text-soft"></p>
+        </div>
+        <div>
+          <h4 class="mt-2">Stay Connected</h4>
+          <p id="social-links" class="text-soft"></p>
+        </div>
+      </div>
+      <p class="copyright mt-4" id="footer-copyright"></p>
     </div>
-    <div class="copyright"><span id="footer-copyright"></span> — Provided for personal and church-use rehearsal and service. Please respect the artists and publishers.</div>
   </footer>
+
+  <div id="toast-stack"></div>
 
   <script src="/js/config.js"></script>
   <script src="/js/app.js"></script>
   <script src="/js/api.js"></script>
-  <script src="/js/song-detail.js"></script>
   <script src="/js/library.js"></script>
 </body>
 </html>

@@ -18,11 +18,37 @@
     regPassword: document.getElementById('reg-password'),
     regRole: document.getElementById('reg-role'),
     registerSubmitting: document.getElementById('register-submitting'),
-    registerBtn: document.getElementById('register-btn')
+    registerBtn: document.getElementById('register-btn'),
+    modeLogin: document.getElementById('mode-login'),
+    modeRegister: document.getElementById('mode-register'),
+    loginView: document.getElementById('login-view'),
+    registerView: document.getElementById('register-view')
   };
 
   function setError(el, msg) { if (el) el.textContent = msg || ''; }
   function hideError(el) { setError(el, ''); }
+
+  /* ---------- mode switching ---------- */
+
+  function switchToLogin() {
+    if (els.modeLogin) els.modeLogin.className =
+      'rounded-md px-3 py-2 text-sm font-medium transition-colors bg-card text-foreground shadow-xs';
+    if (els.modeRegister) els.modeRegister.className =
+      'rounded-md px-3 py-2 text-sm font-medium transition-colors text-muted-foreground hover:text-foreground';
+    if (els.loginView) els.loginView.style.display = 'block';
+    if (els.registerView) els.registerView.classList.add('hidden');
+  }
+
+  function switchToRegister() {
+    if (els.modeLogin) els.modeLogin.className =
+      'rounded-md px-3 py-2 text-sm font-medium transition-colors text-muted-foreground hover:text-foreground';
+    if (els.modeRegister) els.modeRegister.className =
+      'rounded-md px-3 py-2 text-sm font-medium transition-colors bg-card text-foreground shadow-xs';
+    if (els.loginView) els.loginView.style.display = 'none';
+    if (els.registerView) els.registerView.classList.remove('hidden');
+  }
+
+  /* ---------- login ---------- */
 
   function onLoginSubmit(e) {
     e.preventDefault();
@@ -84,27 +110,15 @@
     });
   }
 
-  function toggleRegister(show) {
-    if (els.registerForm) els.registerForm.classList.toggle('hidden', !show);
-    if (els.showRegister) els.showRegister.style.display = show ? 'none' : 'inline';
-    if (show) {
-      hideError(els.error);
-      hideError(els.registerError);
-      els.email.value = '';
-      els.password.value = '';
-      if (els.regName) els.regName.value = '';
-      if (els.regEmail) els.regEmail.value = '';
-      if (els.regPassword) els.regPassword.value = '';
-      if (els.regRole) els.regRole.value = 'super_admin';
-      if (els.registerBtn) els.registerBtn.focus();
-    }
-  }
+  /* ---------- init ---------- */
 
   function init() {
     if (els.form) els.form.addEventListener('submit', onLoginSubmit);
+    if (els.modeLogin) els.modeLogin.addEventListener('click', switchToLogin);
+    if (els.modeRegister) els.modeRegister.addEventListener('click', switchToRegister);
     if (els.showRegister) els.showRegister.addEventListener('click', function (e) {
       e.preventDefault();
-      toggleRegister(true);
+      switchToRegister();
     });
     if (els.registerForm) els.registerForm.addEventListener('submit', onRegisterSubmit);
     if (els.error) els.error.classList.add('hidden');

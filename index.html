@@ -4,101 +4,134 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Christ the Rock Covenant Church Camarin — Worship Song Library</title>
-  <meta name="description" content="The worship song library of Christ the Rock Covenant Church Camarin — praise and worship songs with reference recordings and backing tracks." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css" />
+  <meta name="description" content="A living library of praise and worship songs — listen to reference recordings and download backing tracks for rehearsal and service." />
+  <meta property="og:title" content="Christ the Rock Covenant Church Camarin — Worship Song Library" />
+  <meta property="og:description" content="Listen to reference recordings and download backing tracks for rehearsal and service." />
+  <meta property="og:url" content="https://zapow40.github.io/WorshipWebsite/" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 </head>
 <body>
-
   <header class="site-header">
     <div class="wrap">
-      <a href="index.html" class="brand">
-        <svg viewBox="0 0 32 32"><path d="M16 2 L28 9.5 L28 21.5 L16 30 L4 21.5 L4 9.5 Z" fill="#c8822a"/><circle cx="16" cy="17" r="3.4" fill="#fff"/></svg>
-        Christ the Rock Covenant Church Camarin
+      <a href="/index.html" class="brand">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="2" fill="none" />
+          <path d="M18 10 L24 16 L20 16 L20 22 L16 22 L16 16 L12 16 Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" />
+          <circle cx="18" cy="26" r="2" fill="currentColor" />
+        </svg>
+        <span>Christ the Rock Covenant Church Camarin</span>
       </a>
       <nav class="nav-links">
-        <a href="library.html">Song Library</a>
-        <a href="#footer">About</a>
-        <a href="admin-login.html" class="btn btn-ghost btn-sm">Admin</a>
+        <a href="/library.html">Song Library</a>
+        <a href="/library.html">Categories</a>
+        <a href="/admin-login.html">Admin</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <!-- hero -->
-    <section class="hero">
-      <div class="wrap">
-        <div class="hero-badge" id="hero-badge">Worship song library</div>
-        <h1 id="hero-title">Christ the Rock Covenant Church Camarin</h1>
-        <p id="hero-sub">A living library of praise and worship songs — listen to reference recordings and download backing tracks for rehearsal and service.</p>
-        <div class="hero-cta">
-          <a href="library.html" class="btn btn-soft">Browse the library <span aria-hidden="true">→</span></a>
-          <a href="library.html" class="btn btn-ghost">Browse by category</a>
-        </div>
+  <main class="hero">
+    <div class="wrap">
+      <div class="hero-badge">
+        🎵 Worship Song Library
       </div>
-    </section>
-
-    <!-- featured -->
-    <section class="section" id="featured">
-      <div class="wrap">
-        <h2 class="section-title">Featured songs</h2>
-        <p class="section-sub">A small selection of the songs we are currently singing.</p>
-        <div id="featured-grid" class="featured-grid"><!-- rendered by main.js --></div>
+      <h1 id="hero-title">
+        Christ the Rock<br />
+        Covenant Church Camarin
+      </h1>
+      <p id="hero-sub">A living library of praise and worship songs — listen to reference recordings and download backing tracks for rehearsal and service.</p>
+      <div class="hero-cta">
+        <a href="/library.html" class="btn btn-primary">Browse the Library</a>
+        <a href="/library.html" class="btn btn-outline">Browse by Category</a>
       </div>
-    </section>
-
-    <!-- categories -->
-    <section class="section">
-      <div class="wrap">
-        <h2 class="section-title">Categories</h2>
-        <p class="section-sub">Two distinct streams of worship.</p>
-        <div class="cat-grid">
-          <div id="praise-cat"></div>
-          <div id="worship-cat"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- recently added -->
-    <section class="section" style="background:var(--bg-alt); border-top:1px solid rgba(138,122,148,.14); border-bottom:1px solid rgba(138,122,148,.14);">
-      <div class="wrap">
-        <h2 class="section-title">Recently added</h2>
-        <p class="section-sub">The newest additions to the library.</p>
-        <div id="recent-grid" class="recent-grid"><!-- rendered by main.js --></div>
-      </div>
-    </section>
+    </div>
   </main>
 
-  <footer class="footer" id="footer">
-    <div class="wrap footer-grid">
-      <div>
-        <h4>Christ the Rock</h4>
-        <p class="text-soft">Christ the Rock Covenant Church Camarin.</p>
-        <p id="contact-links" class="text-soft" style="margin-top:.4rem;"></p>
+  <section class="section">
+    <div class="wrap">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="section-title">Featured Songs</h2>
+        <a href="/library.html" class="btn btn-ghost btn-sm">View All</a>
       </div>
-      <div>
-        <h4 style="color:#fff;">Stay connected</h4>
-        <ul class="text-soft">
-          <li id="social-links"></li>
-        </ul>
-      </div>
-      <div>
-        <h4 style="color:#fff;">Visit us</h4>
-        <p class="text-soft" style="font-size:.85rem;">Camarin, Caloocan<br />Main Auditorium</p>
-      </div>
-      <div>
-        <h4 style="color:#fff;">Library</h4>
-        <ul class="text-soft">
-          <li><a href="library.html">Browse songs</a></li>
-          <li><a href="library.html">Download a backing track</a></li>
-        </ul>
+      <div id="featured-grid" class="featured-grid">
+        <div class="card">
+          <div class="placeholder">🎵</div>
+          <div class="body">
+            <h4>Loading...</h4>
+            <p class="text-soft">Loading featured songs...</p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="copyright">
-      <span id="footer-copyright"></span> — All rights reserved. Songs are provided for personal and church-use rehearsal and service. Please respect the artists and publishers.
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="section-title">Two Streams of Worship</h2>
+        <a href="/library.html" class="btn btn-ghost btn-sm">View All Categories</a>
+      </div>
+      <div id="praise-cat" class="cat-grid">
+        <div class="card">
+          <div class="category-icon">🙌</div>
+          <h3>Praise</h3>
+          <p class="text-soft">Upbeat, celebratory songs for gathering.</p>
+          <div class="cat-cta">
+            <a href="/library.html?category=Praise" class="btn btn-primary btn-sm">Browse Praise</a>
+          </div>
+        </div>
+      </div>
+      <div id="worship-cat" class="cat-grid">
+        <div class="card">
+          <div class="category-icon">🕊️</div>
+          <h3>Worship</h3>
+          <p class="text-soft">Reflective, Spirit-led songs for deep moments.</p>
+          <div class="cat-cta">
+            <a href="/library.html?category=Worship" class="btn btn-primary btn-sm">Browse Worship</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--muted); border-top: 1px solid var(--border);">
+    <div class="wrap">
+      <h2 class="section-title">Recently Added</h2>
+      <div id="recent-grid" class="recent-grid">
+        <div class="card">
+          <div class="placeholder">🎵</div>
+          <div class="body">
+            <h4>Loading...</h4>
+            <p class="text-soft">Loading recent songs...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" style="padding:2rem 0 1.5rem;">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h4 id="footer-title">Christ the Rock Covenant Church Camarin</h4>
+          <p id="footer-tagline" class="text-soft">Worship songs for our community</p>
+        </div>
+        <div>
+          <h4 class="mt-2">Contact</h4>
+          <p id="contact-links" class="text-soft"></p>
+        </div>
+        <div>
+          <h4 class="mt-2">Stay Connected</h4>
+          <p id="social-links" class="text-soft"></p>
+        </div>
+      </div>
+      <p class="copyright mt-4" id="footer-copyright"></p>
     </div>
   </footer>
+
+  <div id="toast-stack"></div>
 
   <script src="/js/config.js"></script>
   <script src="/js/app.js"></script>
