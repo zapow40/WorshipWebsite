@@ -15,7 +15,7 @@
  */
 window.CONFIG = {
   // Production (Google Apps Script web app — user's deployed Web App)
-  apiBase: 'https://script.google.com/macros/s/AKfycbzoPeBwp1-VhB6ZLw5Ng0A51x2N4WH3DevSs0QdpUlFusGwjzFpETcLjV5KQZNNn0Pa/exec',
+  apiBase: 'https://script.google.com/macros/s/AKfycby77o891bkt_smh05DpzNW3f7XukfWeMnRV1-7ridqv-8vVbfCdAvCkGN0ww4OaPBo8/exec',
   siteName: 'Christ the Rock Covenant Church Camarin',
   siteTitle: 'Christ the Rock Covenant Church Camarin',
   siteTagline: 'Worship songs for our community — Praise & Worship',
