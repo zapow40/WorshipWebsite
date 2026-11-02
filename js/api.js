@@ -137,6 +137,12 @@
     resetUserPassword: function (token, password) {
       return request('resetUserPassword', { data: { token: token, password: password } });
     },
+    register: function (data) {
+      return request('register', { data: data });
+    },
+    approveRegistration: function (data) {
+      return request('approveRegistration', { data: data });
+    },
     updateSettings: function (data) {
       return request('updateSettings', { data: data });
     },
