@@ -6,7 +6,7 @@ import { clearSession, getToken } from "@/lib/admin-session";
  * needs the admin token returned by the password login.
  */
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbyQbm-W01vSqVnFQvq7rDWy-sh7aBeZjfEonsVmD5tIvZtGBRTp_Km3SL5YRUeJHvy5/exec";
+  "https://script.google.com/macros/s/AKfycbyoXadG6eV2_7Z1Nk6ENdsZkKtEip-atD4aXGdBu78NBlLG2Pg_iDAtVAcFzFx0aWM-/exec";
 
 const asArray = (value) => (Array.isArray(value) ? value : []);
 
