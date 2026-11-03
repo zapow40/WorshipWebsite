@@ -10,6 +10,7 @@ export function SongCard({ song, className }) {
   const theme = themeFor(song.category);
   const active = isActive(song.reference_audio_url);
   const playing = active && isPlaying;
+  const backingPlaying = isActive(song.backing_track_url) && isPlaying;
 
   return (
     <article
@@ -72,16 +73,38 @@ export function SongCard({ song, className }) {
           </button>
 
           {song.backing_track_url ? (
-            <a
-              href={song.backing_track_url}
-              download
-              target="_blank"
-              rel="noreferrer"
-              className="flex flex-1 items-center justify-center gap-2 rounded-full border border-white/12 px-4 py-2.5 text-xs text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
-            >
-              <Download className="h-3.5 w-3.5" />
-              Backing track
-            </a>
+            <>
+              <button
+                type="button"
+                onClick={() =>
+                  play({
+                    url: song.backing_track_url,
+                    title: song.title,
+                    subtitle: `Backing track${song.backing_track_duration ? ` · ${formatTime(song.backing_track_duration)}` : ""}`,
+                    category: song.category,
+                  })
+                }
+                aria-label={backingPlaying ? `Pause backing track of ${song.title}` : `Play backing track of ${song.title}`}
+                className={cn(
+                  "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition",
+                  backingPlaying
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-white/15 text-foreground hover:border-primary/60 hover:bg-primary/15 hover:text-primary",
+                )}
+              >
+                {backingPlaying ? <Pause className="h-4 w-4" /> : <Play className="ml-0.5 h-4 w-4" />}
+              </button>
+              <a
+                href={song.backing_track_url}
+                download
+                target="_blank"
+                rel="noreferrer"
+                className="flex flex-1 items-center justify-center gap-2 rounded-full border border-white/12 px-3 py-2.5 text-xs text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
+              >
+                <Download className="h-3.5 w-3.5" />
+                Backing
+              </a>
+            </>
           ) : (
             <span className="flex flex-1 items-center justify-center rounded-full border border-white/8 px-4 py-2.5 text-xs text-muted-foreground/50">
               No track yet

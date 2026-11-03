@@ -3,6 +3,7 @@ import { ArrowLeft, Download, FileAudio, Headphones, Music2, Pause, Play } from 
 
 import { usePlayer } from "@/components/audio/PlayerProvider";
 import { getSongDetail } from "@/lib/api";
+import { isDriveAudio } from "@/lib/audio-url";
 import { Link } from "@/lib/router";
 import { formatTime, themeFor } from "@/lib/song-theme";
 import { cn } from "@/lib/utils";
@@ -57,6 +58,7 @@ export function SongPage({ songId }) {
   const theme = themeFor(song.category);
   const active = isActive(song.reference_audio_url);
   const playing = active && isPlaying;
+  const backingPlaying = isActive(song.backing_track_url) && isPlaying;
 
   return (
     <div className="relative pb-20 pt-32">
@@ -123,7 +125,8 @@ export function SongPage({ songId }) {
                 <div>
                   <p className="text-sm text-foreground">{song.reference_file_name || "Reference audio"}</p>
                   <p className="font-mono text-[11px] text-muted-foreground">
-                    {formatTime(song.reference_duration)} · plays in the player below
+                    {formatTime(song.reference_duration)} ·{" "}
+                    {isDriveAudio(song.reference_audio_url) ? "opens the Drive player" : "plays in the player below"}
                   </p>
                 </div>
               </div>

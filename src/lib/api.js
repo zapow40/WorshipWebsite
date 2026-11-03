@@ -1,4 +1,5 @@
 import { clearSession, getToken } from "@/lib/admin-session";
+import { normalizeAudioUrl } from "@/lib/audio-url";
 
 /**
  * The song library lives in the church's Google Sheet, reached through the
@@ -9,6 +10,18 @@ const API_URL =
   "https://script.google.com/macros/s/AKfycbyoXadG6eV2_7Z1Nk6ENdsZkKtEip-atD4aXGdBu78NBlLG2Pg_iDAtVAcFzFx0aWM-/exec";
 
 const asArray = (value) => (Array.isArray(value) ? value : []);
+
+/** Older records may hold a Drive "view" link; make them playable everywhere. */
+function normalizeSong(song) {
+  if (!song || typeof song !== "object") return song;
+  return {
+    ...song,
+    reference_audio_url: normalizeAudioUrl(song.reference_audio_url),
+    backing_track_url: normalizeAudioUrl(song.backing_track_url),
+  };
+}
+
+const normalizeSongs = (songs) => asArray(songs).map(normalizeSong);
 
 function unwrap(payload) {
   if (!payload || payload.ok !== true) {
@@ -101,7 +114,14 @@ export async function getSiteContent() {
 
 export async function getHomeData() {
   try {
-    return { ...EMPTY_HOME, ...(await getJson("bootstrap")) };
+    const home = (await getJson("bootstrap")) || {};
+    return {
+      ...EMPTY_HOME,
+      ...home,
+      songs: normalizeSongs(home.songs),
+      recentSongs: normalizeSongs(home.recentSongs),
+      setlistItems: normalizeSongs(home.setlistItems),
+    };
   } catch {
     return EMPTY_HOME;
   }
@@ -110,7 +130,7 @@ export async function getHomeData() {
 export async function listSongs({ q, category, key, sort } = {}) {
   try {
     const result = await getJson("songs", { q, category, key, sort });
-    const songs = asArray(result.songs);
+    const songs = normalizeSongs(result.songs);
     const keys = asArray(result.keys);
     const availableKeys = keys.length
       ? keys
@@ -123,7 +143,7 @@ export async function listSongs({ q, category, key, sort } = {}) {
 
 export async function getSongDetail(id) {
   try {
-    return await getJson("song", { id });
+    return normalizeSong(await getJson("song", { id }));
   } catch {
     return null;
   }
@@ -134,7 +154,7 @@ export async function getSongDetail(id) {
 export async function getAdminOverview() {
   const [home, library] = await Promise.all([getJson("bootstrap"), postJson("setlists.list")]);
   return {
-    songs: asArray(home.songs),
+    songs: normalizeSongs(home.songs),
     praiseCount: home.praiseCount ?? 0,
     worshipCount: home.worshipCount ?? 0,
     setlists: asArray(library.setlists),
@@ -143,12 +163,12 @@ export async function getAdminOverview() {
 
 export async function getSetlistLibrary() {
   const [songs, library] = await Promise.all([getJson("songs"), postJson("setlists.list")]);
-  return { songs: asArray(songs.songs), setlists: asArray(library.setlists) };
+  return { songs: normalizeSongs(songs.songs), setlists: asArray(library.setlists) };
 }
 
 export async function getLibraryExport() {
   const [songs, library] = await Promise.all([getJson("songs"), postJson("setlists.list")]);
-  return { songs: asArray(songs.songs), setlists: asArray(library.setlists) };
+  return { songs: normalizeSongs(songs.songs), setlists: asArray(library.setlists) };
 }
 
 /* ------------------------------------------------------------ admin writes */

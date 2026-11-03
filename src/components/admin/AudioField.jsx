@@ -1,14 +1,21 @@
 import { useRef, useState } from "react";
-import { Loader2, Music2, RefreshCw, Trash2, UploadCloud } from "lucide-react";
+import { Check, Link2, Loader2, Music2, RefreshCw, Trash2, UploadCloud, X } from "lucide-react";
 import { toast } from "sonner";
-import { AUDIO_ACCEPT, formatFileSize, uploadAudio, validateAudioFile } from "@/lib/audio";
+import { AUDIO_ACCEPT, formatFileSize, linkAudio, uploadAudio, validateAudioFile } from "@/lib/audio";
 import { formatTime } from "@/lib/song-theme";
 import { cn } from "@/lib/utils";
 
-/** One audio slot: upload, preview, replace, remove. */
-export function AudioField({ label, hint, value, onChange }) {
+/** One audio slot: upload, link, preview, replace, remove. */
+export function AudioField({ label, hint, value, onChange, onBusyChange }) {
   const inputRef = useRef(null);
   const [busy, setBusy] = useState(false);
+  const [linking, setLinking] = useState(false);
+  const [linkValue, setLinkValue] = useState("");
+
+  const setWorking = (working) => {
+    setBusy(working);
+    onBusyChange?.(working);
+  };
 
   const handleFile = async (file) => {
     const problem = validateAudioFile(file);
@@ -16,16 +23,35 @@ export function AudioField({ label, hint, value, onChange }) {
       toast.error(problem);
       return;
     }
-    setBusy(true);
+    setWorking(true);
     try {
       const uploaded = await uploadAudio(file);
       onChange(uploaded);
       toast.success(`${label} uploaded`);
-    } catch {
-      toast.error("Upload failed. Please check the file and try again.");
+    } catch (error) {
+      toast.error(error?.message || "Upload failed. Please check the file and try again.");
     } finally {
-      setBusy(false);
+      setWorking(false);
       if (inputRef.current) inputRef.current.value = "";
+    }
+  };
+
+  const attachLink = async () => {
+    if (!linkValue.trim()) {
+      toast.error("Paste the Google Drive link first.");
+      return;
+    }
+    setWorking(true);
+    try {
+      const linked = await linkAudio({ url: linkValue, name: `${label} (linked)` });
+      onChange(linked);
+      setLinking(false);
+      setLinkValue("");
+      toast.success(`${label} linked`);
+    } catch (error) {
+      toast.error(error?.message || "That link could not be used.");
+    } finally {
+      setWorking(false);
     }
   };
 
@@ -107,6 +133,52 @@ export function AudioField({ label, hint, value, onChange }) {
               <span className="text-[10px] text-muted-foreground">MP3, WAV or M4A · up to 25 MB</span>
             </>
           )}
+        </button>
+      )}
+
+      {linking ? (
+        <div className="mt-2 flex items-center gap-2">
+          <input
+            value={linkValue}
+            onChange={(event) => setLinkValue(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                event.preventDefault();
+                attachLink();
+              }
+            }}
+            placeholder="https://drive.google.com/file/d/FILE_ID/view"
+            className="min-w-0 flex-1 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground/60 focus:border-primary/50 focus:outline-none"
+          />
+          <button
+            type="button"
+            disabled={busy}
+            onClick={attachLink}
+            className="rounded-lg border border-primary/40 bg-primary/10 p-2 text-primary transition hover:bg-primary/20 disabled:opacity-50"
+            aria-label={`Use this link as ${label}`}
+          >
+            {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Check className="h-3.5 w-3.5" />}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setLinking(false);
+              setLinkValue("");
+            }}
+            className="rounded-lg p-2 text-muted-foreground transition hover:bg-white/5 hover:text-foreground"
+            aria-label="Cancel link"
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setLinking(true)}
+          className="mt-2 inline-flex items-center gap-1.5 text-[11px] text-muted-foreground transition hover:text-primary"
+        >
+          <Link2 className="h-3 w-3" />
+          {value?.url ? "Use a different link" : "Already in Drive? Paste the link"}
         </button>
       )}
     </div>

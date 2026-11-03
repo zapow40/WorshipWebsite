@@ -25,10 +25,20 @@ export function SongForm({ initial, onSubmit, submitting, submitLabel = "Save so
       : null,
   );
   const [errors, setErrors] = useState({});
+  const [uploads, setUploads] = useState({ reference: false, backing: false });
+  const uploading = uploads.reference || uploads.backing;
+
+  const markUpload = (slot) => (working) => {
+    setUploads((current) => (current[slot] === working ? current : { ...current, [slot]: working }));
+    setErrors((current) => (current.form ? { ...current, form: undefined } : current));
+  };
 
   const submit = (event) => {
     event.preventDefault();
     const next = {};
+    if (uploading) {
+      next.form = "An audio upload is still running. Wait for it to finish, then save.";
+    }
     if (!title.trim()) next.title = "A song title is required.";
     const bpmNumber = bpm === "" ? null : Number(bpm);
     if (bpmNumber !== null && (!Number.isFinite(bpmNumber) || bpmNumber < 20 || bpmNumber > 300)) {
@@ -184,14 +194,18 @@ export function SongForm({ initial, onSubmit, submitting, submitLabel = "Save so
           hint="The original recording the team learns from."
           value={reference}
           onChange={setReference}
+          onBusyChange={markUpload("reference")}
         />
         <AudioField
           label="Backing track"
           hint="Instrumental used in the service. Visitors can download this."
           value={backing}
           onChange={setBacking}
+          onBusyChange={markUpload("backing")}
         />
       </div>
+
+      {errors.form && <p className="text-xs text-destructive">{errors.form}</p>}
 
       <div className="flex flex-wrap items-center justify-end gap-2 pt-1">
         {onCancel && (
@@ -205,11 +219,11 @@ export function SongForm({ initial, onSubmit, submitting, submitLabel = "Save so
         )}
         <button
           type="submit"
-          disabled={submitting}
+          disabled={submitting || uploading}
           className="flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition hover:bg-primary/90 disabled:opacity-60"
         >
-          {submitting && <Loader2 className="h-4 w-4 animate-spin" />}
-          {submitLabel}
+          {(submitting || uploading) && <Loader2 className="h-4 w-4 animate-spin" />}
+          {uploading ? "Waiting for upload…" : submitLabel}
         </button>
       </div>
     </form>
