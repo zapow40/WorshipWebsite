@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Stage lights falling through haze over a worship space">
+  <defs>
+    <radialGradient id="bg" cx="24%" cy="12%" r="95%">
+      <stop offset="0" stop-color="#1d1a10"/>
+      <stop offset="0.45" stop-color="#0d1018"/>
+      <stop offset="1" stop-color="#05060a"/>
+    </radialGradient>
+    <linearGradient id="beamGold" x1="0" y1="0" x2="0.55" y2="1">
+      <stop offset="0" stop-color="#f2d27a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#f2d27a" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="beamBlue" x1="1" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#5b8bd6" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#5b8bd6" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="warmGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#e7b84a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#e7b84a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="coolGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#3f6fb5" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#3f6fb5" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0c12" stop-opacity="0"/>
+      <stop offset="1" stop-color="#05060a" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="vignette" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#05060a" stop-opacity="0.15"/>
+      <stop offset="0.7" stop-color="#05060a" stop-opacity="0"/>
+      <stop offset="1" stop-color="#05060a" stop-opacity="0.85"/>
+    </linearGradient>
+    <filter id="blurLg" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="55"/>
+    </filter>
+    <filter id="blurMd" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+
+  <g filter="url(#blurLg)">
+    <ellipse cx="330" cy="130" rx="420" ry="260" fill="url(#warmGlow)"/>
+    <ellipse cx="1290" cy="250" rx="460" ry="320" fill="url(#coolGlow)"/>
+  </g>
+
+  <g filter="url(#blurMd)" opacity="0.75">
+    <polygon points="150,-80 440,-80 980,1000 520,1000" fill="url(#beamGold)"/>
+    <polygon points="380,-80 560,-80 1120,1000 820,1000" fill="url(#beamGold)" opacity="0.55"/>
+    <polygon points="1460,-80 1180,-80 640,1000 1080,1000" fill="url(#beamBlue)"/>
+  </g>
+
+  <g filter="url(#blurMd)" opacity="0.55">
+    <ellipse cx="760" cy="720" rx="520" ry="130" fill="#d9a43c" opacity="0.16"/>
+    <ellipse cx="1180" cy="640" rx="300" ry="90" fill="#4b7cc4" opacity="0.18"/>
+  </g>
+
+  <!-- mic silhouette -->
+  <g opacity="0.6">
+    <rect x="760" y="430" width="10" height="300" rx="5" fill="#0a0b10"/>
+    <ellipse cx="765" cy="412" rx="34" ry="48" fill="#0a0b10"/>
+    <ellipse cx="765" cy="405" rx="22" ry="32" fill="#151823" opacity="0.9"/>
+    <rect x="690" y="728" width="152" height="12" rx="6" fill="#0a0b10"/>
+  </g>
+
+  <rect width="1600" height="1000" fill="url(#floor)"/>
+  <rect width="1600" height="1000" fill="url(#vignette)"/>
+</svg>
