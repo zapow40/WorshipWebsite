@@ -15,7 +15,7 @@ Read `README.md` for setup and deployment.
 - `src/lib/api.js`: the only module that calls the Apps Script backend. Reads are public `GET`s; writes `POST` with the admin token. It clears the session when the backend says the token expired.
 - `src/lib/AdminContext.jsx` + `src/lib/admin-session.js`: password login and `sessionStorage` token. `useAdmin()` exposes `isAdmin`, `login(password)`, `logout()`.
 - `src/lib/site-defaults.js`: fallback copy for the public site and placeholder library data. Local artwork lives in `public/images/`.
-- `src/lib/audio.js`: audio validation, duration probing and the base64 upload through `uploadAudioFile`.
+- `src/lib/audio.js`: audio validation, duration probing and the base64 upload through `uploadAudioFile`. `src/lib/audio-url.js` normalises Drive share links into playable URLs and is shared with `api.js`.
 - `src/pages/admin/`: Overview, Songs, NewSong, Setlist, Content, Settings. `src/layouts/AdminLayout.jsx` redirects signed-out visitors to `#/login`.
 - `apps-script/Code.gs`: the Google Apps Script backend. Keep its action names and payload shapes in sync with `src/lib/api.js`.
 

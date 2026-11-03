@@ -24,5 +24,18 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <!--
+      Safety net for GitHub Pages: if Pages is serving this unbuilt source file
+      (it still points at /src/main.jsx) then the browser cannot run it and the
+      page stays black. Send those visitors to the built copy in ./dist/ instead.
+      The built page has no /src/main.jsx script, so it never redirects.
+    -->
+    <script>
+      (function () {
+        if (!/\.github\.io$/i.test(location.hostname)) return;
+        if (!document.querySelector('script[src$="/src/main.jsx"]')) return;
+        location.replace("./dist/" + location.hash);
+      })();
+    </script>
   </body>
 </html>

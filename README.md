@@ -54,3 +54,17 @@ The available actions are documented at the top of `apps-script/Code.gs`. The AP
 ## Deploy
 
 `npm run build` writes everything to `dist/`. Upload that folder to any static host. Assets are relative, so it also works from a subfolder. Because routing is hash-based, no redirect rules are needed.
+
+### GitHub Pages
+
+Never publish the repository root — `index.html` there is the Vite source and points at `/src/main.jsx`, which GitHub Pages serves as plain text, giving a blank/black page. Publish the build instead:
+
+1. Push the repository, including `.github/workflows/deploy.yml`.
+2. In the repository open **Settings → Pages** and set **Source** to **GitHub Actions**.
+3. Every push to `main` builds `dist/` and deploys it to `https://<user>.github.io/<repo>/`.
+
+The workflow can also be run by hand from the **Actions** tab (`Deploy to GitHub Pages` → **Run workflow**). If the site still shows the old page, check that the latest workflow run finished and hard-refresh the browser.
+
+### Audio files
+
+Reference recordings and backing tracks are uploaded through Apps Script into the Drive folder owned by the backend. Uploads are size-limited to 25 MB and the file is shared as "anyone with the link can view". If a file is already in Drive, open the song in **Manage songs → edit** and use **Already in Drive? Paste the link** — any Drive share link (`https://drive.google.com/file/d/FILE_ID/view`) is converted to a playable URL automatically.
